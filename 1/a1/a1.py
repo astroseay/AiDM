@@ -13,8 +13,8 @@ from sklearn import linear_model
 import global_avg
 import movie_avg
 import user_avg
-import matrix_fact
-import als
+# import matrix_fact
+# import als
 
 # np.set_printoptions(np.inf)
 # f_path = '/Users/seayc/Documents/school/masters/classes/year_one/aidm/hw/1/data/'

@@ -36,6 +36,8 @@ def global_avg(fn):
 
     #apply the model to the test set:
         err_test[fold]=np.sqrt(np.mean((test[:,2]-gmr)**2))
+        mae_train[fold] = np.mean(np.abs(train[:,2] - gmr))
+        mae_test[fold] = np.mean(np.abs(test[:,2] - gmr))
 
     #print errors:
         print("Fold " + str(fold) + ": RMSE_train=" + str(err_train[fold]) + "; RMSE_test=" + str(err_test[fold]))
@@ -44,3 +46,7 @@ def global_avg(fn):
     print("\n")
     print("Mean RMS error on TRAIN: " + str(np.mean(err_train)))
     print("Mean RMS error on  TEST: " + str(np.mean(err_test)))
+    print ('MAE on TRAIN: ' + str(np.mean(mae_train)))
+    print ('MAE on TEST: ' + str(np.mean(mae_test)))
+
+    print("global avg: %s seconds ---" % (time.time() - start_time))
