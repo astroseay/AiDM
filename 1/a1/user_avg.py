@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import time
-
+# RW gets 1.02, 1.01
 def mean_user(x):
     user_count=np.bincount(x[0])
     zeros_train = np.array(np.where(user_count[1:len(user_count)] == 0))
@@ -12,10 +12,28 @@ def mean_user(x):
     return np.array(full)
 
 def user_avg(fn):
+    df = pd.DataFrame(fn)
+    ratings_user=pd.DataFrame(fn)
+    ratings_user=ratings_user.append(ratings_user)
+    user_average = df.groupby(by=0, as_index=False)[2].mean()
+    user_average = user_average.append(user_average)
+    ratings_movie=pd.DataFrame(fn)
+    ratings_movie=ratings_movie.append(ratings_movie)
+    movie_average = df.groupby(by=1, as_index=False)[2].mean()
+    movie_average = movie_average.append(movie_average)
+    global_average = np.mean(fn[:,2])
+
+    nfolds = 5
+
     err_train=np.zeros(nfolds)
     err_test=np.zeros(nfolds)
     mae_train=np.zeros(nfolds)
     mae_test=np.zeros(nfolds)
+
+    np.random.seed(1)
+
+    seqs=[x%nfolds for x in range(len(fn))]
+    np.random.shuffle(seqs)
 
     start_time = time.time()
     print ('User Average as a Recommender:')

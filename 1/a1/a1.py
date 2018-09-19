@@ -13,6 +13,7 @@ from sklearn import linear_model
 import global_avg
 import movie_avg
 import user_avg
+import combo
 # import matrix_fact
 # import als
 
@@ -61,6 +62,9 @@ def recommender():
 
 ratings = np.load('rate.npy')
 global_avg.global_avg(ratings)
-#movie_avg.movie_avg(ratings)
-#user_avg.user_avg(ratings)
+user_avg.user_avg(ratings)
+movie_avg.movie_avg(ratings)
+combo.combo(ratings)
+#matrix_fact
+#als
 # print(ratings[:,2])

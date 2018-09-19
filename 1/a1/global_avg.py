@@ -14,6 +14,10 @@ def global_avg(fn):
     #allocate memory for results:
     err_train=np.zeros(nfolds)
     err_test=np.zeros(nfolds)
+    mae_train=np.zeros(nfolds)
+    mae_test=np.zeros(nfolds)
+    print ('Global Average as a Recommender:')
+    start_time = time.time()
 
     #to make sure you are able to repeat results, set the random seed to something:
     np.random.seed(1)

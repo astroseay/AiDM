@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import time
-
+#RW 1.04, 1.25 test
 def mean_movie(x):
     movie_count = np.bincount(x[1])
     zeros_train = np.array(np.where(movie_count[1:len(movie_count)] == 0))
@@ -12,12 +12,32 @@ def mean_movie(x):
     return np.array(full)
 
 def movie_avg(fn):
+
+    df = pd.DataFrame(fn)
+    ratings_user=pd.DataFrame(fn)
+    ratings_user=ratings_user.append(ratings_user)
+    user_average = df.groupby(by=0, as_index=False)[2].mean()
+    user_average = user_average.append(user_average)
+    ratings_movie=pd.DataFrame(fn)
+    ratings_movie=ratings_movie.append(ratings_movie)
+    movie_average = df.groupby(by=1, as_index=False)[2].mean()
+    movie_average = movie_average.append(movie_average)
+    global_average = np.mean(fn[:,2])
+
+    nfolds = 5
+
     err_train=np.zeros(nfolds)
     err_test=np.zeros(nfolds)
     mae_train=np.zeros(nfolds)
     mae_test=np.zeros(nfolds)
 
     start_time = time.time()
+
+    np.random.seed(1)
+
+    seqs=[x%nfolds for x in range(len(fn))]
+    np.random.shuffle(seqs)
+
     print ('Movie Average as a Recommender:')
     for fold in range(nfolds):
         train_set=np.array([x!=fold for x in seqs])
