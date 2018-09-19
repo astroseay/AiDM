@@ -4,7 +4,6 @@ import time
 
 """
 ratings based on average of all ratings
-
 """
 
 # ratings = np.load('rate.npy')
