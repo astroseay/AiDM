@@ -3,7 +3,6 @@ import pandas as pd
 import time
 
 """
-ratings based on average of all ratings
 """
 
 # ratings = np.load('rate.npy')
@@ -16,7 +15,7 @@ def global_avg(fn):
     err_test=np.zeros(nfolds)
     mae_train=np.zeros(nfolds)
     mae_test=np.zeros(nfolds)
-    print ('Global Average as a Recommender:')
+    print ('Recommendations based on global average of all ratings:')
     start_time = time.time()
 
     #to make sure you are able to repeat results, set the random seed to something:
@@ -44,13 +43,13 @@ def global_avg(fn):
         mae_test[fold] = np.mean(np.abs(test[:,2] - gmr))
 
     #print errors:
-        print("Fold " + str(fold) + ": RMSE_train=" + str(err_train[fold]) + "; RMSE_test=" + str(err_test[fold]))
+        print("Fold " + str(fold+1) + ": RMSE_train = " + str(err_train[fold]) + "; RMSE_test = " + str(err_test[fold]))
 
     #print the final conclusion:
     print("\n")
     print("Mean RMS error on TRAIN: " + str(np.mean(err_train)))
     print("Mean RMS error on  TEST: " + str(np.mean(err_test)))
-    print ('MAE on TRAIN: ' + str(np.mean(mae_train)))
-    print ('MAE on TEST: ' + str(np.mean(mae_test)))
+    print('MAE on TRAIN: ' + str(np.mean(mae_train)))
+    print('MAE on  TEST: ' + str(np.mean(mae_test)))
 
-    print("global avg: %s seconds ---" % (time.time() - start_time))
+    print("global avg runtime: %s seconds ---" % (time.time() - start_time))

@@ -49,7 +49,7 @@ def combo(fn):
     np.random.shuffle(seqs)
 
     start_time = time.time()
-    print ('Linear Regression:')
+    print ('Recommendations from a combination of user and movie averages:')
     for fold in range(nfolds):
 
         train_set=np.array([x!=fold for x in seqs])
@@ -78,7 +78,7 @@ def combo(fn):
         err_test[fold] = np.sqrt(np.mean((np.array(test[2])-pred_test)**2))
         mae_train[fold] = np.mean(np.abs(np.array(train[2])-pred_train))
         mae_test[fold] = np.mean(np.abs(test[2]-pred_test))
-        print("Fold " + str(fold) + ": RMSE_train=" + str(err_train[fold]) + "; RMSE_test=" + str(err_test[fold]))
+        print("Fold " + str(fold+1) + ": RMSE_train = " + str(err_train[fold]) + "; RMSE_test = " + str(err_test[fold]))
 
 
 
@@ -86,7 +86,7 @@ def combo(fn):
     print('Mean error on TRAIN: '+ str(np.mean(err_train)))
     print('Mean error on  TEST: ' + str(np.mean(err_test)))
     print ('MAE on TRAIN: ' + str(np.mean(mae_train)))
-    print ('MAE on TEST: ' + str(np.mean(mae_test)))
-    print ("alpha=", np.mean(alpha), "beta=",np.mean(beta) , "gamma=", np.mean(gamma))
+    print ('MAE on  TEST: ' + str(np.mean(mae_test)))
+    print ("alpha = ", np.mean(alpha), "beta  =",np.mean(beta) , "gamma = ", np.mean(gamma))
 
-    print("Linear Regression:  %s seconds ---" % (time.time() - start_time))
+    print("Linear regression runtime:  %s seconds ---" % (time.time() - start_time))

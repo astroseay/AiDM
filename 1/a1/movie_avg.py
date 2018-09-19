@@ -14,10 +14,6 @@ def mean_movie(x):
 def movie_avg(fn):
 
     df = pd.DataFrame(fn)
-    ratings_user=pd.DataFrame(fn)
-    ratings_user=ratings_user.append(ratings_user)
-    user_average = df.groupby(by=0, as_index=False)[2].mean()
-    user_average = user_average.append(user_average)
     ratings_movie=pd.DataFrame(fn)
     ratings_movie=ratings_movie.append(ratings_movie)
     movie_average = df.groupby(by=1, as_index=False)[2].mean()
@@ -38,7 +34,7 @@ def movie_avg(fn):
     seqs=[x%nfolds for x in range(len(fn))]
     np.random.shuffle(seqs)
 
-    print ('Movie Average as a Recommender:')
+    print ('Recommendations from all movie averages:')
     for fold in range(nfolds):
         train_set=np.array([x!=fold for x in seqs])
         test_set=np.array([x==fold for x in seqs])
@@ -53,7 +49,7 @@ def movie_avg(fn):
         mae_train[fold] = np.mean(np.abs(np.array(train_movies[2]) - mean_movie(train_movies)))
         mae_test[fold] =  np.mean(np.abs(np.array(test_movies[2]) - mean_movie(test_movies)))
 
-        print("Fold " + str(fold) + ": RMSE_train=" + str(err_train[fold]) + "; RMSE_test=" + str(err_test[fold]))
+        print("Fold " + str(fold+1) + ": RMSE_train = " + str(err_train[fold]) + "; RMSE_test = " + str(err_test[fold]))
 
 
 
@@ -61,6 +57,6 @@ def movie_avg(fn):
     print("Mean error on TRAIN: " + str(np.mean(err_train)))
     print("Mean error on  TEST: " + str(np.mean(err_test)))
     print ('MAE on TRAIN: ' + str(np.mean(mae_train)))
-    print ('MAE on TEST: ' + str(np.mean(mae_test)))
+    print ('MAE on  TEST: ' + str(np.mean(mae_test)))
 
-    print("Movie avg:  %s seconds ---" % (time.time() - start_time))
+    print("Movie avg runtime:  %s seconds ---" % (time.time() - start_time))

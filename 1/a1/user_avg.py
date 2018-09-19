@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import time
-# RW gets 1.02, 1.01
+
 def mean_user(x):
     user_count=np.bincount(x[0])
     zeros_train = np.array(np.where(user_count[1:len(user_count)] == 0))
@@ -17,10 +17,6 @@ def user_avg(fn):
     ratings_user=ratings_user.append(ratings_user)
     user_average = df.groupby(by=0, as_index=False)[2].mean()
     user_average = user_average.append(user_average)
-    ratings_movie=pd.DataFrame(fn)
-    ratings_movie=ratings_movie.append(ratings_movie)
-    movie_average = df.groupby(by=1, as_index=False)[2].mean()
-    movie_average = movie_average.append(movie_average)
     global_average = np.mean(fn[:,2])
 
     nfolds = 5
@@ -36,7 +32,7 @@ def user_avg(fn):
     np.random.shuffle(seqs)
 
     start_time = time.time()
-    print ('User Average as a Recommender:')
+    print ('Recommendations from all user averages:')
     for fold in range(nfolds):
 
 
@@ -53,15 +49,15 @@ def user_avg(fn):
 
 
 
-        print("Fold " + str(fold) + ": RMSE_train=" + str(err_train[fold]) + "; RMSE_test=" + str(err_test[fold]))
+        print("Fold " + str(fold+1) + ": RMSE_train = " + str(err_train[fold]) + "; RMSE_test = " + str(err_test[fold]))
 
 
 
     print("\n")
     print("Mean error on TRAIN: " + str(np.mean(err_train)))
     print("Mean error on  TEST: " + str(np.mean(err_test)))
-    print ('MAE on TRAIN:' + str(np.mean(mae_train)))
-    print ('MAE on TEST:' + str(np.mean(mae_test)))
+    print('MAE on TRAIN:' + str(np.mean(mae_train)))
+    print('MAE on  TEST:' + str(np.mean(mae_test)))
 
 
-    print("User avg:  %s seconds ---" % (time.time() - start_time))
+    print("User avg runtime:  %s seconds ---" % (time.time() - start_time))
