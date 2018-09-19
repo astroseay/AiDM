@@ -87,6 +87,6 @@ def combo(fn):
     print('Mean error on  TEST: ' + str(np.mean(err_test)))
     print ('MAE on TRAIN: ' + str(np.mean(mae_train)))
     print ('MAE on  TEST: ' + str(np.mean(mae_test)))
-    print ("alpha = ", np.mean(alpha), "beta  =",np.mean(beta) , "gamma = ", np.mean(gamma))
+    print ("alpha =", np.mean(alpha), "; beta =",np.mean(beta) , "; gamma =", np.mean(gamma))
 
     print("Linear regression runtime:  %s seconds ---" % (time.time() - start_time))
