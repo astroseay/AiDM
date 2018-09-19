@@ -4,6 +4,7 @@ import time
 
 """
 ratings based on average of all ratings
+sdfsdf
 """
 
 # ratings = np.load('rate.npy')
