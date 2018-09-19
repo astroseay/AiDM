@@ -14,7 +14,7 @@ import global_avg
 import movie_avg
 import user_avg
 import combo
-# import matrix_fact
+import matrix_fact
 # import als
 
 # np.set_printoptions(np.inf)
@@ -23,10 +23,10 @@ import combo
 # np.save('rate',ratings)
 
 ratings = np.load('rate.npy')
-global_avg.global_avg(ratings)
-user_avg.user_avg(ratings)
-movie_avg.movie_avg(ratings)
-combo.combo(ratings)
-#matrix_fact
+# global_avg.global_avg(ratings)
+# user_avg.user_avg(ratings)
+# movie_avg.movie_avg(ratings)
+# combo.combo(ratings)
+matrix_fact.gravityAlgorithm(ratings)
 #als
-# print(ratings[:,2])
+#print(ratings[:,2])
