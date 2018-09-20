@@ -5,7 +5,7 @@ import time
 start_time = time.time()
 print('Matrix factorization. Params: num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005, np.random.seed(1)')
 
-def matrix_fact(train,test,num_factors=10,num_iter=75,regularization=0.05,learn_rate=0.005):
+def gravityAlgorithm(train,test,num_factors=10,num_iter=75,reg=0.05,learn_rate=0.005):
     """
     Gravity matrix implementation from Takacs et al. (2007). We compute:
     X = UM where U is an nxm matrix and M is an mxk matrix.
@@ -49,9 +49,7 @@ def matrix_fact(train,test,num_factors=10,num_iter=75,regularization=0.05,learn_
 
         return (predictionTrain, prediction)
 
-        # matrix_factGravity = matrix_fact_gravity(train, test)
-
-def gravityAlgorithm(fn):
+def matrix_fact(fn):
     ratings_user=pd.DataFrame(fn)
     ratings_user=ratings_user.append(ratings_user)
 
@@ -72,13 +70,12 @@ def gravityAlgorithm(fn):
         test_set = np.array([x==fold for x in seqs])
         train = pd.DataFrame(ratings_user.iloc[train_set], columns=[0, 1, 2], dtype=int)
         test = pd.DataFrame(ratings_user.iloc[test_set], columns=[0, 1, 2], dtype=int)
-        matrix_fact(train, test, num_factors=1, num_iter=75, reg=0.05, learn_rate=0.005)
+        # pred = gravityAlgorithm(train, test, num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005)
+        err_train[fold] = np.sqrt(np.mean((np.array(train[2]) - gravityAlgorithm(train, test, num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005)[0]) ** 2))
+        mae_train[fold] = np.mean(np.abs(np.array(train[2]) - gravityAlgorithm(train, test, num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005)[0]))
 
-        err_train[fold] = np.sqrt(np.mean((np.array(train[2]) - matrix_fact(train, test, num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005)[0]) ** 2))
-        mae_train[fold] = np.mean(np.abs(np.array(train[2]) - matrix_fact(train, test, num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005)[0]))
-
-        err_test[fold]= np.sqrt(np.mean((np.array(test[2]) - matrix_fact(train, test, num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005)[1])**2))
-        mae_test[fold] = np.mean(np.abs(np.array(test[2]) - matrix_fact(train, test, num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005)[1]))
+        err_test[fold]= np.sqrt(np.mean((np.array(test[2]) - gravityAlgorithm(train, test, num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005)[1])**2))
+        mae_test[fold] = np.mean(np.abs(np.array(test[2]) - gravityAlgorithm(train, test, num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005)[1]))
         print("Fold " + str(fold+1) + ": RMSE_train = " + str(err_train[fold]) + "; RMSE_test = " + str(err_test[fold]))
 
     print("\n")

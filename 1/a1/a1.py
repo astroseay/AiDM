@@ -27,6 +27,6 @@ ratings = np.load('rate.npy')
 # user_avg.user_avg(ratings)
 # movie_avg.movie_avg(ratings)
 # combo.combo(ratings)
-matrix_fact.gravityAlgorithm(ratings)
+matrix_fact.matrix_fact(ratings)
 #als
 #print(ratings[:,2])
