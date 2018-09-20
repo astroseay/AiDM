@@ -36,10 +36,10 @@ def global_avg(fn):
 
     #apply the model to the train set:
         err_train[fold]=np.sqrt(np.mean((train[:,2]-gmr)**2))
-
+        mae_train[fold] = np.mean(np.abs(train[:,2] - gmr))
+        
     #apply the model to the test set:
         err_test[fold]=np.sqrt(np.mean((test[:,2]-gmr)**2))
-        mae_train[fold] = np.mean(np.abs(train[:,2] - gmr))
         mae_test[fold] = np.mean(np.abs(test[:,2] - gmr))
 
     #print errors:
