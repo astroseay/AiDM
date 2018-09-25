@@ -15,7 +15,7 @@ def gravityAlgorithm(train,test,num_factors=10,num_iter=75,reg=0.05,learn_rate=0
     test=np.array(test)
     U = np.random.rand(max(np.max(train[:,0]), np.max(test[:,0]) + 1), num_factors)
     M = np.random.rand(num_factors,max(np.max(train[:,1]),np.max(test[:,1])) + 1)
-    print(len(U),len(M))
+    #print(len(U),len(M))
 
     for i in range(num_iter):
         for j in range(len(train)):
