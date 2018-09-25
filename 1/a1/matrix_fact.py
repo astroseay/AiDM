@@ -15,6 +15,7 @@ def gravityAlgorithm(train,test,num_factors=10,num_iter=75,reg=0.05,learn_rate=0
     test=np.array(test)
     U = np.random.rand(max(np.max(train[:,0]), np.max(test[:,0]) + 1), num_factors)
     M = np.random.rand(num_factors,max(np.max(train[:,1]),np.max(test[:,1])) + 1)
+    print(len(U),len(M))
 
     for i in range(num_iter):
         for j in range(len(train)):
@@ -71,7 +72,7 @@ def matrix_fact(fn):
         train = pd.DataFrame(ratings_user.iloc[train_set], columns=[0, 1, 2], dtype=int)
         test = pd.DataFrame(ratings_user.iloc[test_set], columns=[0, 1, 2], dtype=int)
         # pred = gravityAlgorithm(train, test, num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005)
-        err_train[fold] = np.sqrt(np.mean((np.array(train[2]) - gravityAlgorithm(train, test, num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005)[0]) ** 2))
+        err_train[fold] = np.sqrt(np.mean((np.array(train[2]) - gravityAlgorithm(train, test, num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005)[0])**2))
         mae_train[fold] = np.mean(np.abs(np.array(train[2]) - gravityAlgorithm(train, test, num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005)[0]))
 
         err_test[fold]= np.sqrt(np.mean((np.array(test[2]) - gravityAlgorithm(train, test, num_factors=10, num_iter=75, reg=0.05, learn_rate=0.005)[1])**2))
