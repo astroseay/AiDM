@@ -74,10 +74,10 @@ def combo(fn):
         pred_test[pred_test>5]=5
         pred_test[pred_test<1]=1
 
-        err_train[fold] = np.sqrt(np.mean((np.array(train[2])-pred_train)**2))
-        err_test[fold] = np.sqrt(np.mean((np.array(test[2])-pred_test)**2))
-        mae_train[fold] = np.mean(np.abs(np.array(train[2])-pred_train))
-        mae_test[fold] = np.mean(np.abs(test[2]-pred_test))
+        err_train[fold] = np.sqrt(np.mean((np.array(train[2]) - pred_train)**2))
+        mae_train[fold] = np.mean(np.abs(np.array(train[2]) - pred_train))
+        err_test[fold] = np.sqrt(np.mean((np.array(test[2]) - pred_test)**2))
+        mae_test[fold] = np.mean(np.abs(test[2] - pred_test))
         print("Fold " + str(fold+1) + ": RMSE_train = " + str(err_train[fold]) + "; RMSE_test = " + str(err_test[fold]))
 
 

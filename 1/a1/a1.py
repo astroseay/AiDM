@@ -14,7 +14,8 @@ import global_avg
 import movie_avg
 import user_avg
 import combo
-# import matrix_fact
+import matrix_fact
+import matplotlib.pyplot as plt
 # import als
 
 # np.set_printoptions(np.inf)
@@ -27,6 +28,8 @@ global_avg.global_avg(ratings)
 user_avg.user_avg(ratings)
 movie_avg.movie_avg(ratings)
 combo.combo(ratings)
-#matrix_fact
+matrix_fact.matrix_fact(ratings)
 #als
-# print(ratings[:,2])
+# plt.hist(ratings[:,2],bins=5,fill=False,histtype='step',color='k')
+# plt.show()
+#print(ratings[:,2])

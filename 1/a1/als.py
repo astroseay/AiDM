@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+import numpy as np
+import pandas as pd
+import time
+
+def als_alg(fn):
+    
+=======
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -81,3 +89,4 @@ plt.show()
 
 
 #print_recommendations(Q_hat=weighted_Q_hat)
+>>>>>>> master
