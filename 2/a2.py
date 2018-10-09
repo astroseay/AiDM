@@ -109,21 +109,21 @@ if __name__ == '__main__':
     # for i in range(1):
     #     stream.append(getSeed())
     #     np.array(stream)
-    
+
     stream = [random.getrandbits(32) for i in range(n)] # randomly generated values
     # print('true n:',np.unique(stream))
-    start_time = time.time()
-    pcsa_run = np.array([pcsa(stream) for j in range(1)])
-    pcsa_rae = rae(n,pcsa_run)
-    print('Run time: %s seconds'  %(time.time() - start_time))
-    print('Relative approximate error: %.3f' % pcsa_rae)
-    # print(pcsa_run,pcsa_rae)
+    # start_time = time.time()
+    # pcsa_run = np.array([pcsa(stream) for j in range(1)])
+    # pcsa_rae = rae(n,pcsa_run)
+    # print('Run time: %s seconds'  %(time.time() - start_time))
+    # print('Relative PCSA approximate error: %.3f' % pcsa_rae)
+    # # print(pcsa_run,pcsa_rae)
 
     start_time = time.time()
     loglog_run = np.array([LogLog(stream,10) for j in range(1)])
     loglog_rae = rae(n,loglog_run)
     print('Run time: %s seconds'  %(time.time() - start_time))
-    print('Relative approximate error: %.3f' % loglog_rae)
+    print('Relative LogLog approximate error: %.3f' % loglog_rae)
     #print(loglog_run)
     #print('LogLog: %.3f' % ((np.abs(10000-LogLog(vals,5)/10000) for j in range(1))))
     #print('Run time %s seconds'  % (time.time() - start_time))
